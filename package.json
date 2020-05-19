@@ -23,5 +23,13 @@
   "devDependencies": {},
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/remotesynth/control-next.git"
+  },
+  "bugs": {
+    "url": "https://github.com/remotesynth/control-next/issues"
+  },
+  "homepage": "https://github.com/remotesynth/control-next#readme"
 }

@@ -1,14 +1,3 @@
-/**
- * Main JS file for theme behaviours
- */
-
-// Responsive video embeds
-var videoEmbeds = [
-  'iframe[src*="youtube.com"]',
-  'iframe[src*="vimeo.com"]'
-];
-reframe(videoEmbeds.join(','));
-
 // Mobile menu
 var menuToggle = document.getElementById('menu-toggle');
 if (menuToggle) {
@@ -26,7 +15,9 @@ if (menuToggle) {
   }, true);
 }
 
+window.onload = function() {
 // Header background image
+console.log("fooo");
 var header = document.querySelector('#masthead');
 if (header) {
   headerBg = document.querySelector('#header-bg');
@@ -37,4 +28,5 @@ if (header) {
   } else {
     header.classList.add('bg--loaded');
   }
+}
 }

@@ -26,20 +26,20 @@ module.exports = {
       }
     },
     {
-      module: require('sourcebit-target-next'),
+      module: require('/Users/brianrinaldi/Documents/projects/sourcebit-target-next'),
       options: {
-        pages: function(objects) {
+        pages: function(objects,utils) {
         return objects.reduce((pages, object) => {
           if ((object.__metadata.modelName === 'about') && (object.__metadata.source === 'sourcebit-source-contentful')) {
-            return pages.concat({ path: '/{slug}', page: object });
+            return pages.concat({ path: '/{slug}', page: {...object, slug: utils.slugify(object['title'])} });
           }
           if ((object.__metadata.modelName === 'blogPost') && (object.__metadata.source === 'sourcebit-source-contentful')) {
-            return pages.concat({ path: '/posts/{slug}', page: object });
+            return pages.concat({ path: '/posts/{slug}', page: {...object, slug: utils.slugify(object['title'])} });
           }
           return pages;
         }, [])
         },
-        commonProps: function(objects) {
+        commonProps: function(objects,utils) {
         return {
           posts: objects.reduce((acc, object) => object.__metadata.modelName === 'blogPost' ? acc.concat(object) : acc, [])
         }

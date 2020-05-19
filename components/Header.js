@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function Layout({ children, config, ...props }) {
+export default function Layout({ children, config, pages, ...props }) {
     const headerStyle = {
         backgroundImage: 'url(' + config.bgimage + ')',
     };
@@ -24,10 +24,14 @@ export default function Layout({ children, config, ...props }) {
                       <li className="menu-item ">
                         <a href="/">Home</a>
                       </li>
-                      
-                      <li className="menu-item ">
-                        <a href="/about/">About</a>
+                      {pages &&
+                        pages.map((page, index) => {
+                          return (
+                      <li className="menu-item" key={index}>
+                        <Link href="[slug]" as={`${page.path}`}><a>{page.page.title}</a></Link>
                       </li>
+                          )
+                      })}
                     </ul>
                   </div>
                 </div>

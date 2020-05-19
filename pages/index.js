@@ -4,34 +4,35 @@ import Link from 'next/link'
 import { sourcebitDataClient } from 'sourcebit-target-next'
 
 export default function Home(props) {
-  const posts = props.props.posts
+  const posts = props.posts
+  const pages = props.pages
   const config = props.configData
-  console.log(props.props)
+
   return (
-    <Layout config={config}>
+    <Layout config={config} pages={pages}>
         <div className="post-feed">
         {posts &&
-          posts.map((post) => {
-            let postDate = new Date(post.date)
+          posts.map((post,index) => {
+            let postDate = new Date(post.page.date)
             return (
-          <article className="post">
+          <article className="post" key={index}>
             <header className="post-header">
-              <h2 className="post-title"><Link href="/posts/[slug]" as={`/posts/${post.slug}`}><a rel="bookmark">{post.title}</a></Link></h2>
+              <h2 className="post-title"><Link href="[slug]" as={`${post.path}`}><a rel="bookmark">{post.page.title}</a></Link></h2>
               <div className="post-meta">
                 Published on <time className="published"
                   dateTime="2020-02-20 00:00">{postDate.toDateString()}</time>
               </div>
             </header>
             
-            <Link href="/posts/[slug]" as={`/posts/${post.slug}`}><a className="post-thumbnail">
-              <img className="thumbnail" src={post.image} alt="Federal Bureau of Control" />
+            <Link href="[slug]" as={`${post.path}`}><a className="post-thumbnail">
+              <img className="thumbnail" src={post.page.image} alt="{post.page.title}" />
             </a></Link>
             
             <div className="post-content">
-            <ReactMarkdown source={post.description} />
+            <ReactMarkdown source={post.page.description} />
             </div>
             <p className="read-more">
-              <Link href="/posts/[slug]" as={`/posts/${post.slug}`}><a className="read-more-link">Keep reading <span className="icon-arrow-right" aria-hidden="true"></span></a></Link>
+              <Link href="[slug]" as={`${post.path}`}><a className="read-more-link">Keep reading <span className="icon-arrow-right" aria-hidden="true"></span></a></Link>
             </p>
           </article>
             )
@@ -43,13 +44,17 @@ export default function Home(props) {
 
 export async function getStaticProps() {
   const configData = await import(`../data/config.json`)
-  const props = await sourcebitDataClient.getStaticPropsForPageAtPath('/')
+  const sb = await sourcebitDataClient.getData()
+  const pages = sb.pages.filter(page => page.path !== '/' && !page.path.startsWith('/posts/'))
+  const posts = sb.pages.filter(page => page.path !== '/' && page.path.startsWith('/posts/'))
+
   return {
     props: {
       configData: {
         ...configData
       },
-      props
+      pages,
+      posts
     }
   }
 }
