@@ -17,14 +17,14 @@ export default function Home(props) {
             return (
           <article className="post" key={index}>
             <header className="post-header">
-              <h2 className="post-title"><Link href="[slug]" as={`${post.path}`}><a rel="bookmark">{post.page.title}</a></Link></h2>
+              <h2 className="post-title"><Link href="/posts/[slug]" as={`${post.path}`}><a rel="bookmark">{post.page.title}</a></Link></h2>
               <div className="post-meta">
                 Published on <time className="published"
                   dateTime="2020-02-20 00:00">{postDate.toDateString()}</time>
               </div>
             </header>
             
-            <Link href="[slug]" as={`${post.path}`}><a className="post-thumbnail">
+            <Link href="/posts/[slug]" as={`${post.path}`}><a className="post-thumbnail">
               <img className="thumbnail" src={post.page.image} alt="{post.page.title}" />
             </a></Link>
             
@@ -32,7 +32,7 @@ export default function Home(props) {
             <ReactMarkdown source={post.page.description} />
             </div>
             <p className="read-more">
-              <Link href="[slug]" as={`${post.path}`}><a className="read-more-link">Keep reading <span className="icon-arrow-right" aria-hidden="true"></span></a></Link>
+              <Link href="/posts/[slug]" as={`${post.path}`}><a className="read-more-link">Keep reading <span className="icon-arrow-right" aria-hidden="true"></span></a></Link>
             </p>
           </article>
             )

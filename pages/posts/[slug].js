@@ -1,8 +1,8 @@
-import Layout from '../components/Layout'
+import Layout from '../../components/Layout'
 import ReactMarkdown from "react-markdown"
 import { sourcebitDataClient } from 'sourcebit-target-next'
 
-export default function Page(props) {
+export default function Post(props) {
   const page = props.page
   const pages = props.pages
   const config = props.configData
@@ -30,15 +30,15 @@ export default function Page(props) {
 export async function getStaticPaths() {
     const paths = await sourcebitDataClient.getStaticPaths();
     return {
-        paths: paths.filter(path => path !== '/' && !path.startsWith('/posts/')),
+        paths: paths.filter(path => path.startsWith('/posts/')),
         fallback: false
     };
 }
 
 export async function getStaticProps({ params }) {
-    const configData = await import(`../data/config.json`)
+    const configData = await import(`../../data/config.json`)
     const sb = await sourcebitDataClient.getData()
-    const pagePath = '/' + params.slug
+    const pagePath = '/posts/' + params.slug
     const page = sb.pages.filter(page => page.path == pagePath)[0]
     const pages = sb.pages.filter(page => page.path !== '/' && !page.path.startsWith('/posts/'))
 

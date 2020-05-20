@@ -14,19 +14,3 @@ if (menuToggle) {
     }
   }, true);
 }
-
-window.onload = function() {
-// Header background image
-console.log("fooo");
-var header = document.querySelector('#masthead');
-if (header) {
-  headerBg = document.querySelector('#header-bg');
-  if (headerBg) {
-    imagesLoaded(headerBg, { background: true }, function () {
-      header.classList.add('bg--loaded');
-    });
-  } else {
-    header.classList.add('bg--loaded');
-  }
-}
-}

@@ -1,6 +1,11 @@
 import Link from 'next/link'
 
-export default function Layout({ children, config, pages, ...props }) {
+class Header extends React.Component {
+  
+  render() {
+    const config = this.props.config
+    const pages = this.props.pages
+    const page = this.props.page
     const headerStyle = {
         backgroundImage: 'url(' + config.bgimage + ')',
     };
@@ -43,4 +48,13 @@ export default function Layout({ children, config, pages, ...props }) {
         </div>
       </header>
     )
+  }
+
+  componentDidMount() {
+    // TODO: Update this as it is a bit of a hack used because I am retrofitting a layout not built for react
+    const header = document.querySelector('#masthead')
+    header.classList.add('bg--loaded')
+  }
 }
+
+export default Header
