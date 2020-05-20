@@ -17,8 +17,6 @@ export default function Layout({ children, config, pages, ...props }) {
             </main>
             <Footer config={config}></Footer>
         </div>
-        <script src="/assets/js/plugins.js"></script>
-        <script src="/assets/js/main.js"></script>
     </div>
   )
 }

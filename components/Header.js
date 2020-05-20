@@ -54,6 +54,22 @@ class Header extends React.Component {
     // TODO: Update this as it is a bit of a hack used because I am retrofitting a layout not built for react
     const header = document.querySelector('#masthead')
     header.classList.add('bg--loaded')
+
+    var menuToggle = document.getElementById('menu-toggle');
+    if (menuToggle) {
+      menuToggle.addEventListener('click', function (e) {
+        document.body.classList.toggle('menu--opened')
+        e.preventDefault()
+      }, false)
+
+      document.body.classList.remove('menu--opened')
+
+      window.addEventListener('resize', function () {
+        if (menuToggle.offsetParent === null) {
+          document.body.classList.remove('menu--opened')
+        }
+      }, true);
+    }
   }
 }
 
