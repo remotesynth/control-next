@@ -26,7 +26,7 @@ module.exports = {
       }
     },
     {
-      module: require('/Users/brianrinaldi/Documents/projects/sourcebit-target-next'),
+      module: require('sourcebit-target-next'),
       options: {
         pages: function(objects,utils) {
         return objects.reduce((pages, object) => {
